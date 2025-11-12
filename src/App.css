@@ -1,38 +1,108 @@
-.App {
+/* App.css */
+
+/* Main container */
+.app-container {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Heading */
+.heading {
+  font-size: 28px;
+  color: #222;
+  margin-bottom: 25px;
+  font-weight: bold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Start screen and form headings */
+h1, h2 {
+  margin-bottom: 15px;
+  color: #333;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* Input fields */
+input[type="email"],
+input[type="password"] {
+  display: block;
+  width: 80%;
+  margin: 10px auto 20px auto;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: 0.3s;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Select dropdown */
+#topics {
+  padding: 10px 15px;
+  margin-bottom: 25px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+}
+
+#topics:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Question text */
+.question {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Buttons */
+button {
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
   color: white;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover {
+  background-color: #0056b3;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Next question button */
+.next-btn {
+  margin-bottom: 20px;
+}
+
+/* Previous questions history */
+.history {
+  list-style-type: disc;
+  padding-left: 20px;
+  text-align: left;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.history li {
+  padding: 5px 0;
+  font-size: 16px;
+  color: #555;
 }
