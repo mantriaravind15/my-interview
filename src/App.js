@@ -74,12 +74,15 @@ class App extends Component {
   state = {
     proceed: false,
     start: false,
-    username: "",
     email: "",
+    password: "",
+    accountStatus: false,
     activeTopic: "HTML",
     currentIndex: 0,
     randomQuestion: interview_questions[0].HTML[0],
-    history: []
+    history: [],
+    errorMsg: "",
+    successMsg: ""
   };
 
   componentDidMount() {
@@ -130,30 +133,99 @@ class App extends Component {
   };
 
   onStartInterview = () => {
-   
-    
-      this.setState({ start: true });
-    
+    const userInto = JSON.parse(localStorage.getItem("userInfo"));
+    const { email, password } = this.state;
+
+    if (!userInto) {
+      this.setState({ errorMsg: "No account found. Please sign up first.", successMsg: "" });
+      return;
+    }
+
+    if (email === userInto.email && password === userInto.password) {
+      this.setState({ start: true, successMsg: "Login successful! Starting interview...", errorMsg: "" });
+    } else {
+      this.setState({ errorMsg: "Email or password invalid", successMsg: "" });
+    }
   };
 
-  renderStartScreen = () => (
-    <div>
-      <h1>Welcome to the Interview Practice</h1>
-      <p>Click the start button to begin</p>
-      <button onClick={this.onClickStart}>Start</button>
-    </div>
-  );
+  onClickSignUp = () => {
+    this.setState(prevState => ({
+      accountStatus: !prevState.accountStatus,
+      errorMsg: "",
+      successMsg: ""
+    }));
+  };
 
-  renderUserDetailsForm = () => (
-    <div>
-      <h2>Enter your details to start the interview</h2>
-      <label htmlFor="email">Email:</label>
-      <input name="email" id="email" type="email" onChange={this.handleInputChange} />
-      <label htmlFor="password">Password:</label>
-      <input name="password" id="password" type="password" onChange={this.handleInputChange} />
-      <button onClick={this.onStartInterview}>Begin Interview</button>
-    </div>
-  );
+  onChangeEmail = (event) => {
+    this.setState({ email: event.target.value });
+  };
+
+  onChangePassword = (event) => {
+    this.setState({ password: event.target.value });
+  };
+
+  onSubmitUserInfo = (event) => {
+    event.preventDefault();
+    const { email, password } = this.state;
+    const userDetails = { email, password };
+
+    if (email !== "" && password !== "") {
+      localStorage.setItem("userInfo", JSON.stringify(userDetails));
+      this.setState({ successMsg: "Account created successfully!", errorMsg: "" });
+    } else {
+      this.setState({ errorMsg: "Please enter valid details.", successMsg: "" });
+    }
+  };
+
+  onToggleLogin = () => {
+    this.setState(prevState => ({
+      accountStatus: !prevState.accountStatus,
+      errorMsg: "",
+      successMsg: ""
+    }));
+  };
+
+  renderCreateAccount = () => {
+    const { errorMsg, successMsg } = this.state;
+    return (
+      <div>
+        <h1>Create Account</h1>
+        <form onSubmit={this.onSubmitUserInfo}>
+          <label>Email:</label>
+          <input type="email" onChange={this.onChangeEmail} />
+          <label>Password:</label>
+          <input type="password" onChange={this.onChangePassword} />
+          <button type="submit" className="signup-btn">Create Account</button>
+          <p>Already have an account?</p>
+          <button type="button" className="login-btn" onClick={this.onToggleLogin}>Sign In</button>
+          {errorMsg && <p className="error-message">{errorMsg}</p>}
+          {successMsg && <p className="success-message">{successMsg}</p>}
+        </form>
+      </div>
+    );
+  };
+
+  renderUserDetailsForm = () => {
+    const { errorMsg, successMsg } = this.state;
+    return (
+      <div>
+        <h2>Login to Start Interview</h2>
+        <label>Email:</label>
+        <input name="email" type="email" onChange={this.handleInputChange} />
+        <label>Password:</label>
+        <input name="password" type="password" onChange={this.handleInputChange} />
+        <button className="login-btn" onClick={this.onStartInterview}>Login</button>
+        <button className="signup-btn" onClick={this.onClickSignUp}>Sign Up</button>
+        {errorMsg && <p className="error-message">{errorMsg}</p>}
+        {successMsg && <p className="success-message">{successMsg}</p>}
+      </div>
+    );
+  };
+
+  renderCreateAndSignUp = () => {
+    const { accountStatus } = this.state;
+    return <>{accountStatus ? this.renderCreateAccount() : this.renderUserDetailsForm()}</>;
+  };
 
   renderInterview = () => {
     const { randomQuestion, activeTopic, history } = this.state;
@@ -167,9 +239,7 @@ class App extends Component {
           <option value="REACT">React</option>
         </select>
         <p className="question">{randomQuestion}</p>
-        <button type="button" onClick={this.onNextQuestion} className="next-btn">
-          Next Question
-        </button>
+        <button type="button" onClick={this.onNextQuestion} className="next-btn">Next Question</button>
         <h3>Previous Questions:</h3>
         <ul className="history">
           {history.map((q, idx) => <li key={idx}>{q}</li>)}
@@ -178,14 +248,20 @@ class App extends Component {
     );
   };
 
-  
+  renderStartScreen = () => (
+    <div>
+      <h1>Welcome to the Interview Practice</h1>
+      <p>Click the start button to begin</p>
+      <button onClick={this.onClickStart} className="begin-btn">Start</button>
+    </div>
+  );
 
   render() {
     const { proceed, start } = this.state;
     return (
       <div className="app-container">
         {!proceed && this.renderStartScreen()}
-        {proceed && !start && this.renderUserDetailsForm()}
+        {proceed && !start && this.renderCreateAndSignUp()}
         {proceed && start && this.renderInterview()}
       </div>
     );

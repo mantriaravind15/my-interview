@@ -1,6 +1,6 @@
-/* App.css */
+/* 🌟 App.css */
 
-/* Main container */
+/* Main Container */
 .app-container {
   max-width: 700px;
   margin: 50px auto;
@@ -12,97 +12,228 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Heading */
+/* Main Heading */
 .heading {
-  font-size: 28px;
-  color: #222;
+  font-size: 30px;
+  color: #1c1c1c;
   margin-bottom: 25px;
-  font-weight: bold;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
-/* Start screen and form headings */
+/* Section Headings */
 h1, h2 {
   margin-bottom: 15px;
   color: #333;
+  font-size: 22px;
+  font-weight: 600;
 }
 
-/* Input fields */
+/* Paragraphs */
+p {
+  font-size: 15px;
+  color: #444;
+}
+
+/* Input Fields */
 input[type="email"],
 input[type="password"] {
   display: block;
   width: 80%;
   margin: 10px auto 20px auto;
-  padding: 10px 15px;
+  padding: 12px 15px;
   font-size: 16px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid #ccc;
   outline: none;
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 
 input[type="email"]:focus,
 input[type="password"]:focus {
   border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
 }
 
-/* Select dropdown */
+/* Select Dropdown */
 #topics {
-  padding: 10px 15px;
+  padding: 12px 15px;
   margin-bottom: 25px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 16px;
   outline: none;
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 
 #topics:focus {
   border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
 }
 
-/* Question text */
+/* Question Text */
 .question {
   font-size: 18px;
-  color: #333;
+  color: #222;
   margin-bottom: 20px;
   line-height: 1.6;
   font-weight: 500;
 }
 
-/* Buttons */
+/* Buttons - Default Style */
 button {
-  padding: 12px 25px;
+  padding: 12px 28px;
   font-size: 16px;
   border: none;
-  border-radius: 6px;
-  background-color: #007bff;
+  border-radius: 8px;
+  background-color: #007bff; /* Blue default */
   color: white;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.3s ease;
+  margin: 8px;
+  font-weight: 600;
 }
 
 button:hover {
   background-color: #0056b3;
+  transform: scale(1.03);
 }
 
-/* Next question button */
+button:active {
+  transform: scale(0.98);
+}
+
+/* 🚀 Start / Begin Button */
+.begin-btn {
+  background-color: #007bff;
+  font-size: 16px;
+  padding: 12px 28px;
+  font-weight: 600;
+}
+
+.begin-btn:hover {
+  background-color: #0056b3;
+}
+
+/* ✳️ Login Button - Teal color */
+.login-btn {
+  background-color: #17a2b8;
+  font-size: 14px;
+  padding: 10px 22px;
+  font-weight: 500;
+}
+
+.login-btn:hover {
+  background-color: #138496;
+}
+
+/* ✳️ Signup Button - Green color */
+.signup-btn {
+  background-color: #28a745;
+  font-size: 14px;
+  padding: 10px 22px;
+  font-weight: 500;
+}
+
+.signup-btn:hover {
+  background-color: #218838;
+}
+
+/* ✨ Next Question Button */
 .next-btn {
   margin-bottom: 20px;
 }
 
-/* Previous questions history */
+/* 📜 Previous Questions History */
 .history {
   list-style-type: disc;
-  padding-left: 20px;
+  padding-left: 25px;
   text-align: left;
   max-height: 200px;
   overflow-y: auto;
+  margin-top: 15px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
 }
 
 .history li {
-  padding: 5px 0;
+  padding: 8px 10px;
   font-size: 16px;
-  color: #555;
+  color: #444;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.history li:last-child {
+  border-bottom: none;
+}
+
+/* ⚠️ Error Message */
+.error-message {
+  color: #d63031;
+  background-color: rgba(255, 0, 0, 0.05);
+  border: 1px solid #ff7675;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin: 10px auto 15px auto;
+  width: 80%;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+/* ✅ Success Message */
+.success-message {
+  color: #2ecc71;
+  background-color: rgba(46, 204, 113, 0.05);
+  border: 1px solid #55efc4;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin: 10px auto 15px auto;
+  width: 80%;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+/* ✨ Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 600px) {
+  .app-container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .heading {
+    font-size: 24px;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  #topics {
+    width: 90%;
+  }
+
+  button {
+    width: 90%;
+    font-size: 15px;
+  }
+
+  .question {
+    font-size: 16px;
+  }
 }
